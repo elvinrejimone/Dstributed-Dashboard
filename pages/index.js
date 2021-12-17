@@ -1,23 +1,30 @@
 import Head from 'next/head'
-import Header from '@components/Header'
+import DistributedData from '@components/DistributedData'
 import Footer from '@components/Footer'
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import DistributedDataLogs from '@components/DistributedDataLogs';
+import Container from 'react-bootstrap/Container';
+
+
 
 export default function Home() {
   return (
-    <div className="container">
-      <Head>
-        <title>Next.js Starter!</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div>
+    <Container>
+        <Head>
+          <title>Distributed Dashboard!</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
 
-      <main>
-        <Header title="Welcome to my app!" />
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
-      </main>
-
+        <Row className='main'>
+          <Col sm={8} md={8} lg={8} xs={8}> <DistributedData/> </Col> 
+          <Col sm={8} md={8} lg={4}  xs={8}> <DistributedDataLogs/> </Col>
+          
+        </Row>
+     
       <Footer />
+      </Container>
     </div>
   )
 }
