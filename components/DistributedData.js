@@ -20,10 +20,11 @@ export default function DistributedData() {
   const getDataFromInput = ( type, valueText) => {
     axios.post(MasterNodeURL, {
         message: "filter",
+        type: type,
         value: valueText
       }).then(response => {
-        // var AppData = JSON.parse(response.data);
-        console.log(response.data);
+        console.log(response.data
+          );
     });
   }
   
@@ -54,13 +55,14 @@ export default function DistributedData() {
 
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            <Button onClick={() => getDataFromInput("category", "Health & Fitness")} variant="primary">Health & Fitness</Button>{' '}
-                            <Button onClick={() => getDataFromInput("category", "Travel & Local")} variant="secondary">Travel & Local</Button>{' '}
-                            <Button onClick={() => getDataFromInput("category", "Business")} variant="success">Business</Button>{' '}
-                            <Button onClick={() => getDataFromInput("category", "Entertainment")} variant="warning">Entertainment</Button>{' '}
-                            <Button onClick={() => getDataFromInput("category", "Productivity")} variant="primary">Productivity</Button> {' '}
-                            <Button onClick={() => getDataFromInput("category", "Lifestyle")} variant="light">Lifestyle</Button> {' '}
+                            <Button onClick={() => getDataFromInput("Category", "Health & Fitness")} variant="primary">Health & Fitness</Button>{' '}
+                            <Button onClick={() => getDataFromInput("Category", "Travel & Local")} variant="secondary">Travel & Local</Button>{' '}
+                            <Button onClick={() => getDataFromInput("Category", "Business")} variant="success">Business</Button>{' '}
+                            <Button onClick={() => getDataFromInput("Category", "Entertainment")} variant="warning">Entertainment</Button>{' '}
+                            <Button onClick={() => getDataFromInput("Category", "Productivity")} variant="primary">Productivity</Button> {' '}
+                            <Button onClick={() => getDataFromInput("Category", "Lifestyle")} variant="light">Lifestyle</Button> {' '}
                         </ListGroup.Item>
+                        <ListGroup.Item>    </ListGroup.Item>
                       </ListGroup>
                     </Card.Body>
                   </Card>
