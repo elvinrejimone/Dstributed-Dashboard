@@ -22,8 +22,8 @@ export default function DistributedData() {
         message: "filter",
         value: valueText
       }).then(response => {
-        var AppData = JSON.parse(response.data);
-      console.log(AppData);
+        // var AppData = JSON.parse(response.data);
+        console.log(response.data);
     });
   }
   
