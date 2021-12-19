@@ -75,8 +75,15 @@ export default function DistributedData() {
                         </ListGroup.Item>
                         <ListGroup.Item>
                           <h4> Minimum Installs :</h4>
-                            <Button onClick={() => getDataFromInput("Minimum-Installs", "10")} variant="success">10</Button>{' '}
-                            <Button onClick={() => getDataFromInput("Minimum-Installs", "100")} variant="danger">100</Button>{' '}
+                            <Button onClick={() => getDataFromInput("Minimum-Installs", "10")} variant="secondary">10</Button>{' '}
+                            <Button onClick={() => getDataFromInput("Minimum-Installs", "100")} variant="primary">100</Button>{' '}
+                            <Button onClick={() => getDataFromInput("Minimum-Installs", "500")} variant="warning">500</Button>{' '}
+                            <Button onClick={() => getDataFromInput("Minimum-Installs", "1000")} variant="success">1000</Button>{' '}
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                          <h4> Content Rating :</h4>
+                            <Button onClick={() => getDataFromInput("Content-Rating", "Teen")} variant="warning">Teen</Button>{' '}
+                            <Button onClick={() => getDataFromInput("Content-Rating", "Everyone")} variant="success">Everyone</Button>{' '}
                         </ListGroup.Item>
                       </ListGroup>
                     </Card.Body>
