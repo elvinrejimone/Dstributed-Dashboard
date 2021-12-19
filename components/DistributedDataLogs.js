@@ -39,7 +39,7 @@ export default function DistributedDataLogs() {
   }
   
   return ( 
-      <Card style={{ width: "70%"}}>
+      <Card style={{ width: "100%"}}>
         <Card.Header>
           <Row>
             <Col md={7} lg={7} sm={7}>   

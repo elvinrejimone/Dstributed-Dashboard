@@ -14,8 +14,9 @@ const MasterNodeURL = 'https://us-central1-abiding-topic-335320.cloudfunctions.n
 
 export default function DistributedData() {
   const [AppStoreData, setAppStoreData] = useState([]);
+  const [keyArray, setKeyArray] = useState([]);
 
-
+    // var keys=[];
 
   const getDataFromInput = ( type, valueText) => {
     axios.post(MasterNodeURL, {
@@ -23,8 +24,12 @@ export default function DistributedData() {
         type: type,
         value: valueText
       }).then(response => {
-        console.log(response.data
-          );
+        console.log(response.data);
+        setAppStoreData(response.data.Result);
+        var keys = [];
+        for(var k in response.data.Result[0]) keys.push(k);
+        console.log(keys);
+        setKeyArray(keys);
     });
   }
   
@@ -44,25 +49,35 @@ export default function DistributedData() {
               <Card style={{ width: "70%"}}>
                     <Card.Body>        
                       <ListGroup variant="flush">
-                        <ListGroup.Item>  </ListGroup.Item>
                         <ListGroup.Item>
-                            <Button variant="primary">India</Button>{' '}
-                            <Button variant="secondary">Canada</Button>{' '}
-                            <Button variant="success">USA</Button>{' '}
-                            <Button variant="warning">French</Button>{' '}
-                            <Button variant="primary">Italy</Button> <Button variant="info">Info</Button>{' '}
-                            <Button variant="success">United Kingdom</Button> <Button variant="dark">Dark</Button>{' '}
-
-                        </ListGroup.Item>
-                        <ListGroup.Item>
+                          <h4> Category :</h4>
                             <Button onClick={() => getDataFromInput("Category", "Health & Fitness")} variant="primary">Health & Fitness</Button>{' '}
                             <Button onClick={() => getDataFromInput("Category", "Travel & Local")} variant="secondary">Travel & Local</Button>{' '}
                             <Button onClick={() => getDataFromInput("Category", "Business")} variant="success">Business</Button>{' '}
                             <Button onClick={() => getDataFromInput("Category", "Entertainment")} variant="warning">Entertainment</Button>{' '}
                             <Button onClick={() => getDataFromInput("Category", "Productivity")} variant="primary">Productivity</Button> {' '}
-                            <Button onClick={() => getDataFromInput("Category", "Lifestyle")} variant="light">Lifestyle</Button> {' '}
+                            <Button onClick={() => getDataFromInput("Category", "Lifestyle")} variant="warning">Lifestyle</Button> {' '}
                         </ListGroup.Item>
-                        <ListGroup.Item>    </ListGroup.Item>
+                        <ListGroup.Item>
+                          <h4> Size :</h4>
+                            <Button onClick={() => getDataFromInput("Size", "<=100")} variant="primary">Size Less than 100MB</Button>{' '}
+                            <Button onClick={() => getDataFromInput("Size", ">100")} variant="warning">Size more than 100MB</Button>{' '}
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                          <h4> Ad Supported :</h4>
+                            <Button onClick={() => getDataFromInput("Ad", "True")} variant="success">Advertisement Supported</Button>{' '}
+                            <Button onClick={() => getDataFromInput("Ad", "False")} variant="danger">Advertisement Not Supported</Button>{' '}
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                          <h4> Free or Paid :</h4>
+                            <Button onClick={() => getDataFromInput("Price", "0")} variant="success">Free</Button>{' '}
+                            <Button onClick={() => getDataFromInput("Price", "paid")} variant="danger">Paid</Button>{' '}
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                          <h4> Minimum Installs :</h4>
+                            <Button onClick={() => getDataFromInput("Minimum-Installs", "10")} variant="success">10</Button>{' '}
+                            <Button onClick={() => getDataFromInput("Minimum-Installs", "100")} variant="danger">100</Button>{' '}
+                        </ListGroup.Item>
                       </ListGroup>
                     </Card.Body>
                   </Card>
@@ -71,34 +86,23 @@ export default function DistributedData() {
             <Accordion.Item eventKey="1">
               <Accordion.Header>Data</Accordion.Header>
               <Accordion.Body>
-                  <Table responsive>
+                  <Table striped bordered hover responsive>
                     <thead>
                       <tr>
-                        <th>#</th>
-                        {Array.from({ length: 12 }).map((_, index) => (
-                          <th key={index}>Table heading</th>
+                        {Array.from({ length: 23 }).map((_, index) => (
+                          <th key={index}>{keyArray[index]}</th>
                         ))}
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>1</td>
-                        {Array.from({ length: 12 }).map((_, index) => (
-                          <td key={index}>Table cell {index}</td>
-                        ))}
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        {Array.from({ length: 12 }).map((_, index) => (
-                          <td key={index}>Table cell {index}</td>
-                        ))}
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        {Array.from({ length: 12 }).map((_, index) => (
-                          <td key={index}>Table cell {index}</td>
-                        ))}
-                      </tr>
+                        {AppStoreData.map((obj)=> (
+                        <tr>
+                          {Array.from({ length: 23 }).map((_, index) => (
+                            <td  key={index}>{obj[keyArray[index]]}</td>
+                          ))}
+                        </tr>
+                            
+                        ))}        
                     </tbody>
                   </Table>
               </Accordion.Body>
