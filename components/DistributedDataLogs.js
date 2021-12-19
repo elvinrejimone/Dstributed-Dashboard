@@ -4,8 +4,10 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import Badge from 'react-bootstrap/Badge';
 import axios from "axios";
 import { ArrowClockwise, EraserFill } from 'react-bootstrap-icons';
+
 
 const logURL = "https://us-central1-abiding-topic-335320.cloudfunctions.net/DistSysLogs";
 
@@ -17,7 +19,7 @@ export default function DistributedDataLogs() {
     // Update the document title using the browser API
     axios.get(logURL).then(response => {
       console.log(response.data);
-      setDistSysLogs(response.data);
+      createLogsArray(response.data);
       });
     }, []);
 
@@ -25,8 +27,26 @@ export default function DistributedDataLogs() {
   const fetchLogs = () => {
     axios.get(logURL).then(response => {
       console.log(response.data);
-      setDistSysLogs(response.data);
+      createLogsArray(response.data);
     });
+  }
+
+  const createLogsArray = (logs_array) => {
+    
+    let logsArray = []
+
+    for (let i = 0; i < logs_array.length; i++) {
+      var indVal = logs_array[i];
+      let arr = indVal.split(':');
+      let logObj = {
+        node: arr[0],
+        log: arr[1]
+      }
+      logsArray.push(logObj);
+    }
+
+    setDistSysLogs(logsArray);
+
   }
 
   const clearLogs = () => {
@@ -34,7 +54,7 @@ export default function DistributedDataLogs() {
       message : "clearLogs"
     }).then(response => {
       console.log(response.data);
-      setDistSysLogs(response.data);
+      createLogsArray(response.data);
     });
   }
   
@@ -53,7 +73,7 @@ export default function DistributedDataLogs() {
         </Card.Header>
         <Card.Body>        
           <ListGroup variant="flush">
-            {DistSysLogs.map((log)=>  <ListGroup.Item>{log}</ListGroup.Item> )}
+            {DistSysLogs.map((log)=>  <ListGroup.Item><Badge bg="dark">{log.node}</Badge>{log.log}</ListGroup.Item> )}
           </ListGroup>
         </Card.Body>
       </Card>

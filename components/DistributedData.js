@@ -15,6 +15,8 @@ const MasterNodeURL = 'https://us-central1-abiding-topic-335320.cloudfunctions.n
 export default function DistributedData() {
   const [AppStoreData, setAppStoreData] = useState([]);
   const [keyArray, setKeyArray] = useState([]);
+  const [currView, setCurrView] = useState("0");
+
 
     // var keys=[];
 
@@ -30,6 +32,7 @@ export default function DistributedData() {
         for(var k in response.data.Result[0]) keys.push(k);
         console.log(keys);
         setKeyArray(keys);
+        setCurrView("1");
     });
   }
   
@@ -39,24 +42,23 @@ export default function DistributedData() {
        <Card style={{ width: "100%"}}>
         <Card.Header>
         <Card.Title className="text-success" > <h3 className="text-primary"> Mobile App Data View </h3> </Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">Choose From the Following Operations   </Card.Subtitle>
         </Card.Header>
         <Card.Body>        
-        <Accordion defaultActiveKey="0" flush>
+        <Accordion defaultActiveKey={currView} flush>
             <Accordion.Item eventKey="0">
               <Accordion.Header>Query</Accordion.Header>
               <Accordion.Body>
-              <Card style={{ width: "70%"}}>
+              <Card style={{ width: "100%"}}>
                     <Card.Body>        
                       <ListGroup variant="flush">
                         <ListGroup.Item>
                           <h4> Category :</h4>
-                            <Button onClick={() => getDataFromInput("Category", "Health & Fitness")} variant="primary">Health & Fitness</Button>{' '}
-                            <Button onClick={() => getDataFromInput("Category", "Travel & Local")} variant="secondary">Travel & Local</Button>{' '}
-                            <Button onClick={() => getDataFromInput("Category", "Business")} variant="success">Business</Button>{' '}
-                            <Button onClick={() => getDataFromInput("Category", "Entertainment")} variant="warning">Entertainment</Button>{' '}
-                            <Button onClick={() => getDataFromInput("Category", "Productivity")} variant="primary">Productivity</Button> {' '}
-                            <Button onClick={() => getDataFromInput("Category", "Lifestyle")} variant="warning">Lifestyle</Button> {' '}
+                            <Button size="sm" onClick={() => getDataFromInput("Category", "Health & Fitness")} variant="primary">Health & Fitness</Button>{' '}
+                            <Button size="sm" onClick={() => getDataFromInput("Category", "Travel & Local")} variant="secondary">Travel & Local</Button>{' '}
+                            <Button size="sm" onClick={() => getDataFromInput("Category", "Business")} variant="success">Business</Button>{' '}
+                            <Button size="sm" onClick={() => getDataFromInput("Category", "Entertainment")} variant="warning">Entertainment</Button>{' '}
+                            <Button size="sm" onClick={() => getDataFromInput("Category", "Productivity")} variant="primary">Productivity</Button> {' '}
+                            <Button size="sm" onClick={() => getDataFromInput("Category", "Lifestyle")} variant="warning">Lifestyle</Button> {' '}
                         </ListGroup.Item>
                         <ListGroup.Item>
                           <h4> Size :</h4>

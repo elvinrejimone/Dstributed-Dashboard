@@ -8,7 +8,7 @@ export default function Footer() {
     <>
     <Navbar expand="lg" variant="light" bg="light" className='.footer'>
       <Container>
-        Distributed Dashboard <img src="/netliheart.svg" alt="Netlify Logo" className={styles.logo} /> Data and Logs
+        Distributed Data and Logs
       </Container>
     </Navbar>
       
